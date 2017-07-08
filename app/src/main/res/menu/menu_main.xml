@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.MainActivity">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/search"
+        android:orderInCategory="100"
+        android:title="@string/action_search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_create_order"
+        android:icon="@drawable/tambah_icon"
+        android:orderInCategory="99"
+        android:title="@string/action_create_key"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:orderInCategory="101"
+        android:title="@string/action_settings"
+        app:showAsAction="never"
+    />
+    <item
+        android:id="@+id/action_diarsipkan"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:orderInCategory="101"
+        android:title="@string/action_diarsipkan"
+        app:showAsAction="never" />
+
+</menu>

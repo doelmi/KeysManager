@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="id.doelmi.keysmanager.activity.TambahKunciActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Gambar"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_weight="0.43"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_launcher" />
+
+            <Button
+                android:id="@+id/btn_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Select Image" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Nama Kunci"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/nama_kunci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginLeft="2dp"
+                android:hint="Nama Kunci"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Deskripsi Kunci"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/deskripsi_kunci"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="0.26"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:hint="Deskripsi Kunci (Optional)"
+                android:layout_marginLeft="2dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Kirim" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

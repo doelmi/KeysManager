@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Keys Manager</string>
+
+    <string-array name="titles">
+        <item>Daftar Kunci</item>
+        <item>Pengambilan Kunci</item>
+        <item>Pengembalian Kunci</item>
+        <item>Log Aktivitas</item>
+    </string-array>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Cari</string>
+    <string name="action_create_order">Create Order</string>
+    <string name="action_create_key">Tambahkan Kunci</string>
+    <string name="action_share">Share</string>
+    <string name="action_diarsipkan">Kunci Diarsipkan</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+
+    <string name="detail_kunci">Detail Kunci</string>
+    <string name="edit_kunci">Edit Kunci</string>
+    <string name="hapus_kunci">Arsipkan Kunci</string>
+
+    <string name="ambil_kunci">Ambil Kunci</string>
+    <string name="kembali_kunci">Kembali Kunci</string>
+
+    <string name="detail_log">Detail Log Aktivitas</string>
+    <string name="tambah_kunci">Tambah Kunci</string>
+
+    <string name="daftar_kunci">Daftar Kunci</string>
+    <string name="pengembalian_kunci">Pengembalian Kunci</string>
+    <string name="pengambilan_kunci">Pengambilan Kunci</string>
+    <string name="log_aktivitas">Log Aktivitas</string>
+
+    <string name="tab1">tab1</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@color/warna_ungu"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Informasi Kunci"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_dialog"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/ic_launcher"
+        app:civ_border_width="3dp"
+        app:civ_border_color="#ffffff"
+        app:civ_fill_color="@color/abu2transparent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+
+        <!--<TextView-->
+        <!--android:id="@+id/textView14"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:text="Informasi Kunci"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat.Title"-->
+        <!--android:textColor="@color/warna_ungu_Dark"-->
+        <!--android:textSize="18dp" />-->
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
+            android:text="Nama Kunci"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/nama_kunci"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:text="Nama Kunci" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/warna_ungu">
+
+        </View>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
+            android:text="Deskripsi Kunci"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/deskripsi_kunci"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:text="Deskripsi Kunci" />
+
+
+    </LinearLayout>
+</LinearLayout>
