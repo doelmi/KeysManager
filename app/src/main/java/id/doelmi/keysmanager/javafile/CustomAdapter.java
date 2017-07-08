@@ -21,17 +21,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import id.doelmi.keysmanager.R;
 import id.doelmi.keysmanager.activity.MainActivity;
 
-/**
- * Created by abdul on 02/07/2017.
- */
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
-    ArrayList<CustomPOJO> list_members = new ArrayList<>();
+    private ArrayList<CustomPOJO> list_members = new ArrayList<>();
 
     private final LayoutInflater inflater;
-    View view;
+    private View view;
 
-    MyViewHolder holder;
+    private MyViewHolder holder;
 
     private Context context;
 
@@ -57,23 +54,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.time.setText(list_items.getTime());
 
         String uri_ = list_items.getGambar();
+        try {
+            if (uri_ != null && uri_.contains("content") && !uri_.contains("provider")) {
+                Uri uri = Uri.parse(uri_);
 
-        if (uri_ != null && uri_.contains("content") && !uri_.contains("provider")) {
-            Uri uri = Uri.parse(uri_);
-
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.context.getContentResolver(), uri);
-            } catch (IOException e) {
-                e.printStackTrace();
+                Bitmap bitmap;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.context.getContentResolver(), uri);
+                    holder.kunciImage.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (uri_ != null && !uri_.equals("0") && !uri_.contains("provider")) {
+                holder.kunciImage.setImageResource(Integer.parseInt(uri_));
+            } else {
+                holder.kunciImage.setImageResource(R.drawable.ic_launcher);
             }
-//            holder.image.setImageBitmap(bitmap);
-            holder.kunciImage.setImageBitmap(bitmap);
-        } else if (uri_ != null && !uri_.equals("0") && !uri_.contains("provider")) {
-//            holder.image.setImageResource(Integer.parseInt(uri_));
-            holder.kunciImage.setImageResource(Integer.parseInt(uri_));
-        } else {
-//            holder.image.setImageResource(R.drawable.ic_launcher);
+        } catch (Exception e) {
             holder.kunciImage.setImageResource(R.drawable.ic_launcher);
         }
 
@@ -97,10 +94,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView username, content, time;
-//        ImageView image;
+        //        ImageView image;
         CircleImageView kunciImage;
 
-        public MyViewHolder(View itemView) {
+        private MyViewHolder(View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);

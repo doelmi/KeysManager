@@ -52,6 +52,10 @@ public class EditKunciActivity extends AppCompatActivity {
 
     String namaKunci;
 
+    ImageView imageView;
+
+    int finalHeight, finalWidth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +67,7 @@ public class EditKunciActivity extends AppCompatActivity {
         Button btn_2 = (Button) findViewById(R.id.button2);
         final EditText nama_kunci = (EditText) findViewById(R.id.nama_kunci);
         final EditText deskripsi_kunci = (EditText) findViewById(R.id.deskripsi_kunci);
-        ImageView imageView = (ImageView) findViewById(R.id.imageView2);
+        imageView = (ImageView) findViewById(R.id.imageView2);
 
 
         id_kunci = (Integer) getIntent().getExtras().get(ID_KUNCI);
@@ -91,17 +95,22 @@ public class EditKunciActivity extends AppCompatActivity {
                 if (uri_ != null) {
                     uri = Uri.parse(uri_);
                 }
-                if (uri_ != null && !uri_.contains("provider")) {
-                    Uri uri = Uri.parse(uri_);
-
-//                    Toast.makeText(this, uri + "", Toast.LENGTH_SHORT).show();
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    imageView.setImageBitmap(bitmap);
-                } else if (gambarKunci != 0) {
-                    imageView.setImageResource(gambarKunci);
-                } else {
+                try {
+                    if (uri_ != null && !uri_.contains("provider")) {
+                        Uri uri = Uri.parse(uri_);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        imageView.setImageBitmap(bitmap);
+                    } else if (gambarKunci != 0) {
+                        imageView.setImageResource(gambarKunci);
+                    } else {
+                        imageView.setImageResource(R.drawable.ic_launcher);
+                    }
+                } catch (IOException e) {
+                    Toast.makeText(this, "Uri Error : " + e, Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
                     imageView.setImageResource(R.drawable.ic_launcher);
                 }
+
                 nama_kunci.setText(namaKunci);
                 deskripsi_kunci.setText(deskripsiKunci);
             }
@@ -110,8 +119,6 @@ public class EditKunciActivity extends AppCompatActivity {
             db.close();
         } catch (SQLiteException e) {
             Toast.makeText(this, "Database Error : " + e, Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            Toast.makeText(this, "Uri Error : " + e, Toast.LENGTH_SHORT).show();
         }
 
         try {
@@ -270,5 +277,13 @@ public class EditKunciActivity extends AppCompatActivity {
         values.put("WAKTU", WAKTU);
         values.put("KUNCI", KUNCI);
         return values;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        finalWidth = imageView.getWidth();
+        imageView.getLayoutParams().height = finalWidth;
+
     }
 }

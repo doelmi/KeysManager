@@ -20,6 +20,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -43,6 +44,9 @@ public class TambahKunciActivity extends AppCompatActivity {
     ArrayList<String> listKunci = new ArrayList<>();
 
     boolean error_sama = false;
+    ImageView imageView;
+
+    int finalHeight, finalWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,8 @@ public class TambahKunciActivity extends AppCompatActivity {
         Button btn_2 = (Button) findViewById(R.id.button2);
         final EditText nama_kunci = (EditText) findViewById(R.id.nama_kunci);
         final EditText deskripsi_kunci = (EditText) findViewById(R.id.deskripsi_kunci);
+        imageView = (ImageView) findViewById(R.id.imageView2);
+
         helper = new SQLiteDBHelper(this);
         try {
             SQLiteDatabase db = helper.getReadableDatabase();
@@ -213,5 +219,13 @@ public class TambahKunciActivity extends AppCompatActivity {
         values.put("WAKTU", WAKTU);
         values.put("KUNCI", KUNCI);
         return values;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        finalWidth = imageView.getWidth();
+        imageView.getLayoutParams().height = finalWidth;
+
     }
 }

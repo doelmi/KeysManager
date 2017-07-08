@@ -14,9 +14,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:orientation="vertical"
             android:padding="10dp"
             android:weightSum="1">
@@ -33,8 +30,11 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:layout_gravity="center"
                 android:layout_weight="0.43"
-                android:padding="5dp"
+                android:background="@color/abu2transparent"
+                android:layout_margin="5dp"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_launcher" />
 
             <Button
@@ -56,12 +56,12 @@
                 android:id="@+id/nama_kunci"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_marginLeft="2dp"
+                android:ems="10"
                 android:hint="Nama Kunci"
+                android:inputType="textPersonName"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="" />
 
             <TextView
@@ -76,13 +76,13 @@
                 android:id="@+id/deskripsi_kunci"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_marginLeft="2dp"
                 android:layout_weight="0.26"
                 android:ems="10"
-                android:inputType="textMultiLine"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:hint="Deskripsi Kunci (Optional)"
-                android:layout_marginLeft="2dp" />
+                android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" />
 
             <Button
                 android:id="@+id/button2"
