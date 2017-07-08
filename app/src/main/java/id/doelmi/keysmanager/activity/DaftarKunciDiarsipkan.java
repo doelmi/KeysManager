@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -33,8 +34,10 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
     RecyclerView recyclerView;
     CustomAdapter adapter;
     private ArrayList<CustomPOJO> listContentArr = new ArrayList<>();
-    ListView listView;
+
     Context activity;
+
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
                 Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
             }
         }));
+
+        textView = (TextView) findViewById(R.id.tidak_ada);
 
         getSupportActionBar().setTitle("Daftar Kunci Diarsipkan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,6 +145,10 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
         super.onResume();
         listContentArr.clear();
         populateRecylerViewValues();
+
+        if (listContentArr.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        }
     }
 
     public static interface ClickListener {

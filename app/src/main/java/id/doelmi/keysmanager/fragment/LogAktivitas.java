@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
         // Required empty public constructor
     }
 
-
+    TextView textView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,6 +79,8 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
 
             }
         }));
+
+        textView = (TextView) v.findViewById(R.id.tidak_ada);
         return v;
     }
 
@@ -177,6 +180,10 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
         super.onResume();
         listContentArr.clear();
         populateRecylerViewValues();
+
+        if (listContentArr.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        }
     }
 
     public static interface ClickListener {

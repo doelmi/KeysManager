@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -43,8 +44,9 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
     RecyclerView recyclerView;
     CustomAdapter adapter;
     private ArrayList<CustomPOJO> listContentArr = new ArrayList<>();
-    ListView listView;
     Context activity;
+
+    TextView textView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +75,9 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
                 Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
             }
         }));
+
+        textView = (TextView) v.findViewById(R.id.tidak_ada);
+
         return v;
     }
 
@@ -146,6 +151,10 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
         super.onResume();
         listContentArr.clear();
         populateRecylerViewValues();
+
+        if (listContentArr.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        }
     }
 
     public static interface ClickListener {

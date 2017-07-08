@@ -17,5 +17,11 @@
         android:scrollbarSize="3dp"
         android:scrollbarThumbVertical="@color/warna_ungu"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v7.widget.RecyclerView>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tidak ditemukan log aktivitas."
+        android:id="@+id/tidak_ada"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 </android.support.design.widget.CoordinatorLayout>
