@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.action_create_order:
-                Intent intent = new Intent(this, TambahKunciActivity.class);
-                startActivity(intent);
-                return true;
+//            case R.id.action_create_order:
+//                Intent intent = new Intent(this, TambahKunciActivity.class);
+//                startActivity(intent);
+//                return true;
             case R.id.action_settings:
 
                 return true;

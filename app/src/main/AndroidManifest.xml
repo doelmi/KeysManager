@@ -39,7 +39,9 @@
             android:label="@string/tambah_kunci" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.DaftarKunciDiarsipkan" />
-        <activity android:name=".activity.EditKunciActivity"></activity>
+        <activity
+            android:name=".activity.EditKunciActivity"
+            android:label="Edit Kunci"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +58,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
         final EditText tanggal_get = (EditText) findViewById(R.id.tanggal);
         final EditText pukul = (EditText) findViewById(R.id.pukulan);
 
-        Button kirim_btn = (Button) findViewById(R.id.kirim_btn);
+        FloatingActionButton kirim_btn = (FloatingActionButton) findViewById(R.id.fab);
 
         final int id_kunci = (Integer) getIntent().getExtras().get(ID_KUNCI);
 

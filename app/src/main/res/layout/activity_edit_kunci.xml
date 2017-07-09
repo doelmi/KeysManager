@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context="id.doelmi.keysmanager.activity.TambahKunciActivity">
+    tools:context="id.doelmi.keysmanager.activity.EditKunciActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,9 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:layout_weight="0.43"
                 android:background="@color/abu2transparent"
-                android:layout_margin="5dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_launcher" />
 
@@ -84,13 +84,20 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Kirim" />
 
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        app:backgroundTint="@color/warna_ungu"
+        app:backgroundTintMode="src_atop"
+        app:elevation="3dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/kirim_putih" />
+</android.support.design.widget.CoordinatorLayout>

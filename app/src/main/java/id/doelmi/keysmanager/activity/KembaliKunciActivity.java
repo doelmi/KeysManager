@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -50,7 +51,7 @@ public class KembaliKunciActivity extends AppCompatActivity {
         final EditText no_id = (EditText) findViewById(R.id.no_id);
         final EditText kunci_kembali = (EditText) findViewById(R.id.kunci_kembali);
 
-        Button kirim_btn = (Button) findViewById(R.id.kirim_btn);
+        FloatingActionButton kirim_btn = (FloatingActionButton) findViewById(R.id.fab);
         final EditText tanggal_get = (EditText) findViewById(R.id.tanggal);
         final EditText pukul = (EditText) findViewById(R.id.pukulan);
 

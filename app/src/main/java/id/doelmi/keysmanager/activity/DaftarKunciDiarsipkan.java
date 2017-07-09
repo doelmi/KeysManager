@@ -148,6 +148,8 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
 
         if (listContentArr.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
+        }else {
+            textView.setVisibility(View.GONE);
         }
     }
 

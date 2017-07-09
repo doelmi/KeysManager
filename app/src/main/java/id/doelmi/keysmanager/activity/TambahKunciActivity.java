@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +54,7 @@ public class TambahKunciActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_kunci);
         Button btn_select = (Button) findViewById(R.id.btn_select);
-        Button btn_2 = (Button) findViewById(R.id.button2);
+        FloatingActionButton btn_2 = (FloatingActionButton) findViewById(R.id.fab);
         final EditText nama_kunci = (EditText) findViewById(R.id.nama_kunci);
         final EditText deskripsi_kunci = (EditText) findViewById(R.id.deskripsi_kunci);
         imageView = (ImageView) findViewById(R.id.imageView2);
@@ -139,7 +140,7 @@ public class TambahKunciActivity extends AppCompatActivity {
                     try {
                         SQLiteDatabase db = helper.getWritableDatabase();
 
-                        db.insert("KUNCI", null, InsertKunci(nama, deskripsi, 0, gambar_uri, 0, null, null, null));
+                        db.insert("KUNCI", null, InsertKunci(nama.toUpperCase(), deskripsi, 0, gambar_uri, 0, null, null, null));
                         db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda menambahkan kunci " + nama, date, nama));
                         db.close();
 

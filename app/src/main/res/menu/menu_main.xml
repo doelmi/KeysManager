@@ -12,12 +12,12 @@
         android:title="@string/action_search"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_create_order"
-        android:icon="@drawable/tambah_icon"
-        android:orderInCategory="99"
-        android:title="@string/action_create_key"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/action_create_order"-->
+        <!--android:icon="@drawable/tambah_icon"-->
+        <!--android:orderInCategory="99"-->
+        <!--android:title="@string/action_create_key"-->
+        <!--app:showAsAction="always" />-->
 
 
     <item

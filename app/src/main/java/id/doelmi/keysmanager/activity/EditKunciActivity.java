@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -64,7 +65,7 @@ public class EditKunciActivity extends AppCompatActivity {
         helper = new SQLiteDBHelper(this);
 
         Button btn_select = (Button) findViewById(R.id.btn_select);
-        Button btn_2 = (Button) findViewById(R.id.button2);
+        FloatingActionButton btn_2 = (FloatingActionButton) findViewById(R.id.fab);
         final EditText nama_kunci = (EditText) findViewById(R.id.nama_kunci);
         final EditText deskripsi_kunci = (EditText) findViewById(R.id.deskripsi_kunci);
         imageView = (ImageView) findViewById(R.id.imageView2);
@@ -203,7 +204,7 @@ public class EditKunciActivity extends AppCompatActivity {
 
                     try {
                         SQLiteDatabase db = helper.getWritableDatabase();
-                        db.update("KUNCI", UpdateKunci(nama, deskripsi, gambarKunci, gambar_uri), "_id = ?", new String[]{Integer.toString(id_kunci)});
+                        db.update("KUNCI", UpdateKunci(nama.toUpperCase(), deskripsi, gambarKunci, gambar_uri), "_id = ?", new String[]{Integer.toString(id_kunci)});
                         db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda memperbarui kunci " + nama, date, nama));
                         db.close();
 

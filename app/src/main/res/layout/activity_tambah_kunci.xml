@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,11 +30,11 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_weight="0.43"
-                android:layout_margin="5dp"
                 android:layout_gravity="center"
-                android:scaleType="centerCrop"
+                android:layout_margin="5dp"
+                android:layout_weight="0.43"
                 android:background="@color/abu2transparent"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_launcher" />
 
             <Button
@@ -56,12 +56,12 @@
                 android:id="@+id/nama_kunci"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_marginLeft="2dp"
+                android:ems="10"
                 android:hint="Nama Kunci"
+                android:inputType="textPersonName"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="" />
 
             <TextView
@@ -76,21 +76,27 @@
                 android:id="@+id/deskripsi_kunci"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_marginLeft="2dp"
                 android:layout_weight="0.26"
                 android:ems="10"
-                android:inputType="textMultiLine"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:hint="Deskripsi Kunci (Optional)"
-                android:layout_marginLeft="2dp" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Kirim" />
+                android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" />
 
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        app:backgroundTint="@color/warna_ungu"
+        android:id="@+id/fab"
+        app:backgroundTintMode="src_atop"
+        app:elevation="3dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/kirim_putih" />
+</android.support.design.widget.CoordinatorLayout>

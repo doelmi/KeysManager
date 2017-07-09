@@ -183,6 +183,8 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
 
         if (listContentArr.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
+        }else {
+            textView.setVisibility(View.GONE);
         }
     }
 

@@ -11,19 +11,32 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
-        android:scrollbars="vertical"
-        android:fadeScrollbars="true"
         android:layout_height="match_parent"
+        android:fadeScrollbars="true"
         android:scrollbarSize="3dp"
         android:scrollbarThumbVertical="@color/warna_ungu"
+        android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v7.widget.RecyclerView>
 
     <TextView
+        android:id="@+id/tidak_ada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Tidak ditemukan daftar kunci."
-        android:id="@+id/tidak_ada"
-        android:visibility="gone"
-        android:layout_gravity="center"/>
+        android:visibility="gone" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:clickable="true"
+        app:backgroundTint="@color/warna_ungu"
+        app:elevation="3dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/tambah_icon" />
 
 </android.support.design.widget.CoordinatorLayout>

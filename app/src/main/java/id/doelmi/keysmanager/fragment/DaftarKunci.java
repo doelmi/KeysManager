@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 
 import id.doelmi.keysmanager.R;
 import id.doelmi.keysmanager.activity.DetailKunciActivity;
+import id.doelmi.keysmanager.activity.MainActivity;
+import id.doelmi.keysmanager.activity.TambahKunciActivity;
 import id.doelmi.keysmanager.dbhelper.SQLiteDBHelper;
 import id.doelmi.keysmanager.javafile.CustomAdapter;
 import id.doelmi.keysmanager.javafile.CustomPOJO;
@@ -78,6 +81,15 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
 
         textView = (TextView) v.findViewById(R.id.tidak_ada);
 
+        FloatingActionButton fab = (FloatingActionButton)v.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, TambahKunciActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
 
@@ -112,7 +124,7 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
                     new String[]{Integer.toString(0)},
                     null,
                     null,
-                    null
+                    "NAMA_KUNCI ASC"
             );
             while (cursor.moveToNext()) {
                 CustomPOJO customPOJO = new CustomPOJO();
@@ -154,6 +166,8 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
 
         if (listContentArr.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
+        }else {
+            textView.setVisibility(View.GONE);
         }
     }
 
