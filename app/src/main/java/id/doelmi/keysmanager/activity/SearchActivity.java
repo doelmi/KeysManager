@@ -12,12 +12,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,9 @@ public class SearchActivity extends AppCompatActivity {
     private Cursor cursor;
 
     RecyclerView recyclerView, recyclerView2;
+
+    LinearLayout linear1, linear2;
+
     CustomAdapter adapter;
     CustomAdapterLog adapterLog;
     private ArrayList<CustomPOJO> listContentArr = new ArrayList<>();
@@ -45,14 +50,12 @@ public class SearchActivity extends AppCompatActivity {
 
     TextView error, labelKunci, labelLog;
 
-    CoordinatorLayout coor1, coor2;
-
     private void gone_all() {
         error.setVisibility(View.GONE);
         labelKunci.setVisibility(View.GONE);
         labelLog.setVisibility(View.GONE);
-        coor1.setVisibility(View.GONE);
-        coor2.setVisibility(View.GONE);
+        linear1.setVisibility(View.GONE);
+        linear2.setVisibility(View.GONE);
     }
 
     boolean hasSearch = false;
@@ -65,9 +68,8 @@ public class SearchActivity extends AppCompatActivity {
         error = (TextView) findViewById(R.id.error);
         labelKunci = (TextView) findViewById(R.id.labelKunci);
         labelLog = (TextView) findViewById(R.id.labelLog);
-
-        coor1 = (CoordinatorLayout) findViewById(R.id.coor1);
-        coor2 = (CoordinatorLayout) findViewById(R.id.coor2);
+        linear1 = (LinearLayout)findViewById(R.id.linear1);
+        linear2 = (LinearLayout)findViewById(R.id.linear2);
 
         gone_all();
 
@@ -96,7 +98,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
             }
         }));
 
@@ -114,7 +116,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
             }
         }));
 
@@ -132,11 +134,22 @@ public class SearchActivity extends AppCompatActivity {
                 listContentArrLog.clear();
                 populateRecylerViewValues(cari);
                 populateRecylerViewValuesLog(cari);
+
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linear2.getLayoutParams();
+                int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (listContentArrLog.size()*100)+30, getResources().getDisplayMetrics());
+                params.height = height;
+                linear2.setLayoutParams(params);
+
+                Toast.makeText(activity, "panjang log = "+height, Toast.LENGTH_SHORT).show();
                 kondisi_tampil();
                 hasSearch = true;
                 return false;
             }
         });
+
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView2.setNestedScrollingEnabled(false);
+
 
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_HOME_AS_UP);
 
@@ -146,17 +159,17 @@ public class SearchActivity extends AppCompatActivity {
     private void kondisi_tampil() {
         if (!listContentArr.isEmpty()) {
             labelKunci.setVisibility(View.VISIBLE);
-            coor1.setVisibility(View.VISIBLE);
+            linear1.setVisibility(View.VISIBLE);
         } else if (listContentArr.isEmpty()) {
             labelKunci.setVisibility(View.GONE);
-            coor1.setVisibility(View.GONE);
+            linear1.setVisibility(View.GONE);
         }
         if (!listContentArrLog.isEmpty()) {
             labelLog.setVisibility(View.VISIBLE);
-            coor2.setVisibility(View.VISIBLE);
+            linear2.setVisibility(View.VISIBLE);
         } else if (listContentArrLog.isEmpty()) {
             labelLog.setVisibility(View.GONE);
-            coor2.setVisibility(View.GONE);
+            linear2.setVisibility(View.GONE);
         }
 
         if (listContentArr.isEmpty() && listContentArrLog.isEmpty()) {
