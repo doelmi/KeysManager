@@ -9,21 +9,15 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +26,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.doelmi.keysmanager.R;
@@ -59,7 +54,6 @@ CircleImageView gambar_kunci;
 
     LinearLayout ambil_kembali_layout, aktivitas_layout;
 
-    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,8 +183,6 @@ CircleImageView gambar_kunci;
             aktivitas_layout.setVisibility(View.GONE);
             getSupportActionBar().setTitle("Detail Kunci Diarsipkan");
         }
-
-//        getSupportActionBar().setElevation(8);
     }
 
     private String cariBulan(int bulan) {
@@ -277,7 +269,7 @@ CircleImageView gambar_kunci;
     }
 
     private void insertLog(String aktivitas) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("ID"));
         final String date = dateFormat.format(new Date());
         try {
             SQLiteDatabase db = helper.getWritableDatabase();

@@ -14,7 +14,6 @@ import android.view.GestureDetector;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 
 import id.doelmi.keysmanager.R;
 import id.doelmi.keysmanager.dbhelper.SQLiteDBHelper;
-import id.doelmi.keysmanager.fragment.DaftarKunci;
 import id.doelmi.keysmanager.javafile.CustomAdapter;
 import id.doelmi.keysmanager.javafile.CustomPOJO;
 
@@ -92,6 +90,7 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
         super.onDestroy();
         cursor.close();
         database.close();
+        helper.close();
     }
 
     private void populateRecylerViewValues() {
@@ -148,23 +147,23 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
 
         if (listContentArr.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             textView.setVisibility(View.GONE);
         }
     }
 
-    public static interface ClickListener {
-        public void onClick(View view, int position);
+    private interface ClickListener {
+        void onClick(View view, int position);
 
-        public void onLongClick(View view, int position);
+        void onLongClick(View view, int position);
     }
 
-    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+    private class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private ClickListener clickListener;
         private GestureDetector gestureDetector;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+        private RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

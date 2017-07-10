@@ -15,7 +15,6 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.IntentCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -168,13 +167,8 @@ public class TambahKunciActivity extends AppCompatActivity {
                 }
             }
         });
-        try {
-            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP);
-            getSupportActionBar().setElevation(8);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(8);
     }
 
     @Override

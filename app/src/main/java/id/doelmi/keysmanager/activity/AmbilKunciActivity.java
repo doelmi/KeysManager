@@ -66,7 +66,8 @@ public class AmbilKunciActivity extends AppCompatActivity {
         final TimePickerDialog pukulan = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                if (Integer.toString(hourOfDay).length() == 1) pukul.setText("0"+hourOfDay + ":" + minute);
+                if (Integer.toString(hourOfDay).length() == 1)
+                    pukul.setText("0" + hourOfDay + ":" + minute);
                 else pukul.setText(hourOfDay + ":" + minute);
             }
         }, hour, minute, true);
@@ -185,14 +186,8 @@ public class AmbilKunciActivity extends AppCompatActivity {
                 }
             }
         });
-
-        try{
-            getSupportActionBar().setElevation(8);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-
+        getSupportActionBar().setElevation(8);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -223,5 +218,12 @@ public class AmbilKunciActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        helper.close();
     }
 }

@@ -1,6 +1,5 @@
 package id.doelmi.keysmanager.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -48,11 +47,8 @@ public class DetailLogAktivitasActivity extends AppCompatActivity {
 
         int id_log = (Integer) getIntent().getExtras().get(ID_LOG);
 
-//        Toast.makeText(this, "ID_LOG" + id_log, Toast.LENGTH_SHORT).show();
-
         String nama_ = null;
         String aktivitas_ = null;
-        int kunci_ = 0;
         String _kunci = null;
         String waktu_ = null;
         String catat_ = null;
@@ -217,7 +213,6 @@ public class DetailLogAktivitasActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         getSupportActionBar().setElevation(8);
     }
 

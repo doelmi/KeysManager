@@ -3,7 +3,6 @@
     package="id.doelmi.keysmanager">
 
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
@@ -41,7 +40,7 @@
         <activity android:name=".activity.DaftarKunciDiarsipkan" />
         <activity
             android:name=".activity.EditKunciActivity"
-            android:label="Edit Kunci"></activity>
+            android:label="@string/edit_kunci"></activity>
     </application>
 
 </manifest>

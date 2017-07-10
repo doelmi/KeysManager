@@ -182,7 +182,6 @@ public class KembaliKunciActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         getSupportActionBar().setElevation(8);
     }
 
@@ -213,5 +212,12 @@ public class KembaliKunciActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        helper.close();
     }
 }

@@ -1,6 +1,5 @@
 package id.doelmi.keysmanager.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,12 +17,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +40,6 @@ public class SearchActivity extends AppCompatActivity {
     CustomAdapterLog adapterLog;
     private ArrayList<CustomPOJO> listContentArr = new ArrayList<>();
     private ArrayList<CustomPOJO> listContentArrLog = new ArrayList<>();
-    ListView listView;
     Context activity;
     EditText search;
 
@@ -382,10 +375,10 @@ public class SearchActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static interface ClickListener {
-        public void onClick(View view, int position);
+    private interface ClickListener {
+        void onClick(View view, int position);
 
-        public void onLongClick(View view, int position);
+        void onLongClick(View view, int position);
     }
 
     @Override
@@ -408,12 +401,12 @@ public class SearchActivity extends AppCompatActivity {
         db.close();
     }
 
-    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+    private class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private ClickListener clickListener;
         private GestureDetector gestureDetector;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+        private RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
