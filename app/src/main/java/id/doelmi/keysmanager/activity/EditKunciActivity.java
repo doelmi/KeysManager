@@ -1,6 +1,5 @@
 package id.doelmi.keysmanager.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -10,13 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,10 +24,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import id.doelmi.keysmanager.R;
 import id.doelmi.keysmanager.dbhelper.SQLiteDBHelper;
@@ -55,7 +51,7 @@ public class EditKunciActivity extends AppCompatActivity {
 
     ImageView imageView;
 
-    int finalHeight, finalWidth;
+    int finalHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,7 +176,7 @@ public class EditKunciActivity extends AppCompatActivity {
             }
         });
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("ID"));
         final String date = dateFormat.format(new Date());
 
         btn_2.setOnClickListener(new View.OnClickListener() {
@@ -283,8 +279,8 @@ public class EditKunciActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        finalWidth = imageView.getWidth();
-        imageView.getLayoutParams().height = finalWidth;
+        finalHeight = imageView.getWidth();
+        imageView.getLayoutParams().height = finalHeight;
 
     }
 }

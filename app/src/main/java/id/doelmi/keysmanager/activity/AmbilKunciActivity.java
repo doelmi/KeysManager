@@ -1,38 +1,30 @@
 package id.doelmi.keysmanager.activity;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NavUtils;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import id.doelmi.keysmanager.R;
 import id.doelmi.keysmanager.dbhelper.SQLiteDBHelper;
@@ -42,7 +34,6 @@ public class AmbilKunciActivity extends AppCompatActivity {
     SQLiteOpenHelper helper;
     int id_log = 1;
     String namaKunci;
-    boolean error = true;
     ScrollView linelayout;
 
     @Override
@@ -69,7 +60,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
         Calendar time = Calendar.getInstance();
         int hour = time.get(Calendar.HOUR_OF_DAY);
         int minute = time.get(Calendar.MINUTE);
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", new Locale("ID"));
 
         pukul.setText(timeFormat.format(new Date()));
         final TimePickerDialog pukulan = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
@@ -89,7 +80,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
 
 
         Calendar newCalendar = Calendar.getInstance();
-        final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", new Locale("ID"));
 
         final DatePickerDialog tanggalan = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -108,7 +99,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
             }
         });
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("ID"));
         final String date = dateFormat.format(new Date());
         try {
             helper = new SQLiteDBHelper(this);
@@ -194,8 +185,14 @@ public class AmbilKunciActivity extends AppCompatActivity {
                 }
             }
         });
-        getSupportActionBar().setElevation(8);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        try{
+            getSupportActionBar().setElevation(8);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -217,12 +214,6 @@ public class AmbilKunciActivity extends AppCompatActivity {
         return values;
     }
 
-    private void pindah_ke_main() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtra(MainActivity.FRAG, 1);
-        startActivity(intent);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

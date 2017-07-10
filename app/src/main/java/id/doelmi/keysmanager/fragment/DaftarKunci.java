@@ -17,8 +17,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +24,6 @@ import java.util.ArrayList;
 
 import id.doelmi.keysmanager.R;
 import id.doelmi.keysmanager.activity.DetailKunciActivity;
-import id.doelmi.keysmanager.activity.MainActivity;
 import id.doelmi.keysmanager.activity.TambahKunciActivity;
 import id.doelmi.keysmanager.dbhelper.SQLiteDBHelper;
 import id.doelmi.keysmanager.javafile.CustomAdapter;
@@ -35,7 +32,7 @@ import id.doelmi.keysmanager.javafile.CustomPOJO;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DaftarKunci extends Fragment implements AdapterView.OnItemClickListener {
+public class DaftarKunci extends Fragment {
     private SQLiteOpenHelper helper;
     private SQLiteDatabase database;
     private Cursor cursor;
@@ -75,7 +72,7 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
+
             }
         }));
 
@@ -100,16 +97,13 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
         startActivity(intent);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Pindah((int) id);
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         cursor.close();
         database.close();
+        helper.close();
     }
 
     private void populateRecylerViewValues() {
@@ -171,18 +165,18 @@ public class DaftarKunci extends Fragment implements AdapterView.OnItemClickList
         }
     }
 
-    public static interface ClickListener {
-        public void onClick(View view, int position);
+    private interface ClickListener {
+        void onClick(View view, int position);
 
-        public void onLongClick(View view, int position);
+        void onLongClick(View view, int position);
     }
 
-    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+    private class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private ClickListener clickListener;
         private GestureDetector gestureDetector;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+        private RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
