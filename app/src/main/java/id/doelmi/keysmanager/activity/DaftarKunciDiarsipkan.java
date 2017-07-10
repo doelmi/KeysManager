@@ -57,7 +57,7 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity, "Long Press on position : " + position, Toast.LENGTH_SHORT).show();
             }
         }));
 

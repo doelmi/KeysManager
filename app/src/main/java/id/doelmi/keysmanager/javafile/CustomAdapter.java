@@ -49,6 +49,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CustomPOJO list_items = list_members.get(position);
+        if (position == 0){
+            holder.garis.setVisibility(View.GONE);
+        }
         holder.username.setText(list_items.getName());
         holder.content.setText(list_items.getContent());
         holder.time.setText(list_items.getTime());
@@ -96,6 +99,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView username, content, time;
         //        ImageView image;
         CircleImageView kunciImage;
+        View garis;
 
         private MyViewHolder(View itemView) {
             super(itemView);
@@ -106,6 +110,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             time = (TextView) itemView.findViewById(R.id.time);
 //            image = (ImageView) itemView.findViewById(R.id.imageView);
             kunciImage = (CircleImageView) itemView.findViewById(R.id.kunciImage);
+            garis = itemView.findViewById(R.id.view9);
         }
 
         @Override

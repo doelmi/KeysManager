@@ -5,28 +5,27 @@
     android:layout_height="100dp"
     android:clickable="true">
 
-    <View
-        android:id="@+id/view9"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@+id/asd"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:background="@color/warna_ungu">
 
-    </View>
 
     <LinearLayout
         android:id="@+id/asd"
         android:layout_width="match_parent"
-        android:layout_height="99.5dp"
+        android:layout_height="match_parent"
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/background"
         android:orientation="vertical">
+        <View
+            android:id="@+id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@color/warna_ungu">
 
+        </View>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

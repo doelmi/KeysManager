@@ -182,7 +182,7 @@ public class EditKunciActivity extends AppCompatActivity {
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nama = nama_kunci.getText().toString();
+                String nama = nama_kunci.getText().toString().toUpperCase();
                 String deskripsi = deskripsi_kunci.getText().toString();
 
                 String gambar_uri = null;
@@ -210,7 +210,6 @@ public class EditKunciActivity extends AppCompatActivity {
                                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-//                                    TambahKunciActivity.super.onBackPressed();
                                         EditKunciActivity.super.onBackPressed();
                                     }
                                 });

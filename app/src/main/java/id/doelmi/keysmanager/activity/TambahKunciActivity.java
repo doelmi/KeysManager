@@ -121,7 +121,7 @@ public class TambahKunciActivity extends AppCompatActivity {
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nama = nama_kunci.getText().toString();
+                String nama = nama_kunci.getText().toString().toUpperCase();
                 String deskripsi = deskripsi_kunci.getText().toString();
 
                 String gambar_uri = null;
@@ -138,7 +138,7 @@ public class TambahKunciActivity extends AppCompatActivity {
                     try {
                         SQLiteDatabase db = helper.getWritableDatabase();
 
-                        db.insert("KUNCI", null, InsertKunci(nama.toUpperCase(), deskripsi, 0, gambar_uri, 0, null, null, null));
+                        db.insert("KUNCI", null, InsertKunci(nama, deskripsi, 0, gambar_uri, 0, null, null, null));
                         db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda menambahkan kunci " + nama, date, nama));
                         db.close();
 

@@ -13,6 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:scrollbarSize="3dp"
+        android:overScrollMode="always"
         android:scrollbarThumbVertical="@color/warna_ungu"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -47,17 +48,16 @@
                 android:id="@+id/linear1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="#ffffff"
                 android:elevation="3dp"
-                android:orientation="vertical"
-                android:layout_marginTop="3dp"
-                android:paddingBottom="30dp"
-                >
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
 
 
@@ -76,19 +76,18 @@
                 android:id="@+id/linear2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="#ffffff"
                 android:elevation="3dp"
-                android:orientation="vertical"
-                android:layout_marginTop="3dp">
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleView2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

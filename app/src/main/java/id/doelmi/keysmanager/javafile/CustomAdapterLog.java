@@ -48,6 +48,9 @@ public class CustomAdapterLog extends RecyclerView.Adapter<CustomAdapterLog.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CustomPOJO list_items = list_members.get(position);
+        if (position == 0){
+            holder.garis.setVisibility(View.GONE);
+        }
         holder.aktivitas.setText(list_items.getName());
         holder.waktu.setText(list_items.getContent());
 
@@ -83,6 +86,7 @@ public class CustomAdapterLog extends RecyclerView.Adapter<CustomAdapterLog.MyVi
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView aktivitas, waktu;
         ImageView imageStatus;
+        View garis;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -91,7 +95,7 @@ public class CustomAdapterLog extends RecyclerView.Adapter<CustomAdapterLog.MyVi
             aktivitas = (TextView) itemView.findViewById(R.id.aktivitas);
             waktu = (TextView) itemView.findViewById(R.id.waktu);
             imageStatus = (ImageView) itemView.findViewById(R.id.imageStatus);
-
+            garis = itemView.findViewById(R.id.view9);
         }
 
         @Override

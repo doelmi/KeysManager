@@ -135,11 +135,9 @@ public class SearchActivity extends AppCompatActivity {
                 populateRecylerViewValuesLog(cari);
 
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) linear2.getLayoutParams();
-                int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (listContentArrLog.size()*100)+30, getResources().getDisplayMetrics());
-                params.height = height;
+                params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (listContentArrLog.size()*100), getResources().getDisplayMetrics());
                 linear2.setLayoutParams(params);
 
-                Toast.makeText(activity, "panjang log = "+height, Toast.LENGTH_SHORT).show();
                 kondisi_tampil();
                 hasSearch = true;
                 return false;
@@ -411,6 +409,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onDestroy();
         if (cursor != null) cursor.close();
         db.close();
+        helper.close();
     }
 
     private class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
