@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "878490421042",
+    "firebase_url": "https://keysmanager-a6ac0.firebaseio.com",
+    "project_id": "keysmanager-a6ac0",
+    "storage_bucket": "keysmanager-a6ac0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878490421042:android:c38cad5ed612aefd",
+        "android_client_info": {
+          "package_name": "id.doelmi.keysmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878490421042-8almq0nb35n0ee6qf1iigqupl97ha92j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.doelmi.keysmanager",
+            "certificate_hash": "2a48f011b9d407efd32082f94a0f933546651816"
+          }
+        },
+        {
+          "client_id": "878490421042-9on9821m7fdkifh98auqjepp3gvll0g6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUqwYmNRmbWpKPbEjx7MHAkNGQBaEC838"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878490421042-9on9821m7fdkifh98auqjepp3gvll0g6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
