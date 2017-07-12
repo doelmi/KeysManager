@@ -184,7 +184,7 @@ public class SearchActivity extends AppCompatActivity {
 
             cursor = db.query(
                     "KUNCI",
-                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "STATUS", "GAMBAR_KUNCI", "GAMBAR_KUNCI_URI"},
+                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "STATUS", "GAMBAR_KUNCI", "GAMBAR_KUNCI_URI", "PATH"},
                     "DIARSIPKAN = ? AND ( NAMA_KUNCI LIKE ? OR DESKRIPSI_KUNCI LIKE ? )",
                     new String[]{Integer.toString(0), "%" + cari + "%", "%" + cari + "%"},
                     null,
@@ -198,6 +198,7 @@ public class SearchActivity extends AppCompatActivity {
                 String kunci = cursor.getString(2);
                 String status = cursor.getString(3);
                 String gambar = cursor.getString(4);
+                String path = cursor.getString(6);
                 if (gambar.equals("0")) {
                     gambar = cursor.getString(5);
                 }
@@ -211,6 +212,7 @@ public class SearchActivity extends AppCompatActivity {
                 customPOJO.setTime(status);
                 customPOJO.setId(id);
                 customPOJO.setGambar(gambar);
+                customPOJO.setPath(path);
 
                 listContentArr.add(customPOJO);
             }

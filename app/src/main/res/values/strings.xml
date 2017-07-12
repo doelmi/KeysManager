@@ -18,7 +18,8 @@
 
     <string name="detail_kunci">Detail Kunci</string>
     <string name="edit_kunci">Edit Kunci</string>
-    <string name="hapus_kunci">Arsipkan Kunci</string>
+    <string name="hapus_kunci">Hapus Kunci</string>
+    <string name="arsip_kunci">Arsipkan Kunci</string>
 
     <string name="ambil_kunci">Ambil Kunci</string>
     <string name="kembali_kunci">Kembali Kunci</string>

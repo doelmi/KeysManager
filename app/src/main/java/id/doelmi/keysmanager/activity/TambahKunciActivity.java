@@ -2,6 +2,8 @@ package id.doelmi.keysmanager.activity;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,11 +28,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import id.doelmi.keysmanager.R;
 import id.doelmi.keysmanager.dbhelper.SQLiteDBHelper;
@@ -121,22 +127,42 @@ public class TambahKunciActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String nama = nama_kunci.getText().toString().toUpperCase();
                 String deskripsi = deskripsi_kunci.getText().toString();
-
-                String gambar_uri = null;
-
-                if (uri != null) {
-                    gambar_uri = uri.toString();
-                }
                 if (nama.length() < 1) {
                     nama_kunci.setError("Nama kunci harus diisi!");
                     nama_kunci.setFocusable(true);
                 } else if (error_sama) {
                     nama_kunci.setFocusable(true);
                 } else {
+
+                    BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+
+                    ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                    File dir = cw.getDir("keysmanager", Context.MODE_PRIVATE);
+                    Random random = new Random();
+                    String imageName = "image_" + String.valueOf(random.nextInt(1000)) + System.currentTimeMillis() + ".jpg";
+                    File myPath = new File(dir, imageName);
+
+                    FileOutputStream fos = null;
+                    try {
+                        fos = new FileOutputStream(myPath);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fos);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    String real_path = dir.getAbsolutePath();
+
                     try {
                         SQLiteDatabase db = helper.getWritableDatabase();
 
-                        db.insert("KUNCI", null, InsertKunci(nama, deskripsi, 0, gambar_uri, 0, null, null, null));
+                        db.insert("KUNCI", null, InsertKunci(nama, deskripsi, 0, imageName, 0, null, null, null, real_path));
                         db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda menambahkan kunci " + nama, date, nama));
                         db.close();
 
@@ -193,7 +219,7 @@ public class TambahKunciActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private ContentValues InsertKunci(String nama_kunci, String deskripsi_kunci, int gambar_kunci, String gambar_uri, int status, String dibawa_oleh, String waktu, String tanggal) {
+    private ContentValues InsertKunci(String nama_kunci, String deskripsi_kunci, int gambar_kunci, String gambar_uri, int status, String dibawa_oleh, String waktu, String tanggal, String path) {
         ContentValues values = new ContentValues();
         values.put("NAMA_KUNCI", nama_kunci);
         values.put("DESKRIPSI_KUNCI", deskripsi_kunci);
@@ -204,6 +230,7 @@ public class TambahKunciActivity extends AppCompatActivity {
         values.put("WAKTU", waktu);
         values.put("TANGGAL", tanggal);
         values.put("DIARSIPKAN", 0);
+        values.put("PATH", path);
         return values;
     }
 

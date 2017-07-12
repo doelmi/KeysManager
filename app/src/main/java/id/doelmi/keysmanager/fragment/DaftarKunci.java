@@ -101,9 +101,6 @@ public class DaftarKunci extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cursor.close();
-        database.close();
-        helper.close();
     }
 
     private void populateRecylerViewValues() {
@@ -113,7 +110,7 @@ public class DaftarKunci extends Fragment {
 
             cursor = database.query(
                     "KUNCI",
-                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "STATUS", "GAMBAR_KUNCI", "GAMBAR_KUNCI_URI"},
+                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "STATUS", "GAMBAR_KUNCI", "GAMBAR_KUNCI_URI", "PATH"},
                     "DIARSIPKAN = ?",
                     new String[]{Integer.toString(0)},
                     null,
@@ -130,6 +127,8 @@ public class DaftarKunci extends Fragment {
                 if (gambar.equals("0")) {
                     gambar = cursor.getString(5);
                 }
+                String path = cursor.getString(6);
+
                 if (status.equals("0")) {
                     status = "Ada";
                 } else {
@@ -140,11 +139,16 @@ public class DaftarKunci extends Fragment {
                 customPOJO.setTime(status);
                 customPOJO.setId(id);
                 customPOJO.setGambar(gambar);
+                customPOJO.setPath(path);
 
                 listContentArr.add(customPOJO);
             }
         } catch (SQLiteException e) {
             Toast.makeText(this.getActivity(), "Database Error : " + e, Toast.LENGTH_SHORT).show();
+        } finally {
+            cursor.close();
+            database.close();
+            helper.close();
         }
 
         adapter.setListContent(listContentArr);

@@ -60,7 +60,7 @@ public class CustomAdapterLog extends RecyclerView.Adapter<CustomAdapterLog.MyVi
             holder.imageStatus.setImageResource(R.drawable.keluar_round);
         }else if (aktivitas.contains("menambah")){
             holder.imageStatus.setImageResource(R.drawable.tambah_round);
-        }else if (aktivitas.contains("mengarsipkan")){
+        }else if (aktivitas.contains("menghapus")){
             holder.imageStatus.setImageResource(R.drawable.delete_round);
         }else if (aktivitas.contains("membatalkan")){
             holder.imageStatus.setImageResource(R.drawable.no_arsip_round);
@@ -68,6 +68,8 @@ public class CustomAdapterLog extends RecyclerView.Adapter<CustomAdapterLog.MyVi
             holder.imageStatus.setImageResource(R.drawable.masuk_round);
         }else if (aktivitas.contains("memperbarui")){
             holder.imageStatus.setImageResource(R.drawable.edit_round);
+        }else if (aktivitas.contains("mengarsipkan")){
+            holder.imageStatus.setImageResource(R.drawable.arsip_round);
         }
 
     }

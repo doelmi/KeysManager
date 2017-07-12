@@ -149,7 +149,7 @@ public class KembaliKunciActivity extends AppCompatActivity {
                 } else {
                     try {
                         SQLiteDatabase db = helper.getWritableDatabase();
-                        db.insert("PENGEMBALIAN_KUNCI", null, InsertPengembalianKunci(nama_pengembali.getText().toString(), no_id.getText().toString(), namaKunci, tanggal_get.getText().toString(), pukul.getText().toString(), id_log));
+                        db.insert("PENGEMBALIAN_KUNCI", null, InsertPengembalianKunci(nama_pengembali.getText().toString(), no_id.getText().toString(), namaKunci, tanggal_get.getText().toString(), pukul.getText().toString(), id_log, id_kunci));
                         db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas(nama_pengembali.getText().toString() + " mengembalikan kunci " + kunci_kembali.getText().toString(), date));
 
                         ContentValues values = new ContentValues();
@@ -186,7 +186,7 @@ public class KembaliKunciActivity extends AppCompatActivity {
     }
 
 
-    private ContentValues InsertPengembalianKunci(String NAMA_PENGEMBALI_KUNCI, String NO_ID_PENGEMBALI, String NAMA_KUNCI_KEMBALI, String TANGGAL_KEMBALI, String WAKTU_KEMBALI, int ID_LOG) {
+    private ContentValues InsertPengembalianKunci(String NAMA_PENGEMBALI_KUNCI, String NO_ID_PENGEMBALI, String NAMA_KUNCI_KEMBALI, String TANGGAL_KEMBALI, String WAKTU_KEMBALI, int ID_LOG, int ID_KUNCI) {
         ContentValues values = new ContentValues();
         values.put("NAMA_PENGEMBALI_KUNCI", NAMA_PENGEMBALI_KUNCI);
         values.put("NO_ID_PENGEMBALI", NO_ID_PENGEMBALI);
@@ -194,6 +194,7 @@ public class KembaliKunciActivity extends AppCompatActivity {
         values.put("TANGGAL_KEMBALI", TANGGAL_KEMBALI);
         values.put("WAKTU_KEMBALI", WAKTU_KEMBALI);
         values.put("ID_LOG", ID_LOG);
+        values.put("ID_KUNCI", ID_KUNCI);
         return values;
     }
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class CustomPOJO {
-    private String name, time, content, gambar;
+    private String name, time, content, gambar, path;
     private int id;
     private ArrayList<CustomPOJO> customPOJOs = new ArrayList<>();
 
@@ -21,6 +21,14 @@ public class CustomPOJO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getTime() {

@@ -3,6 +3,7 @@ package id.doelmi.keysmanager.javafile;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -14,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -49,7 +53,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CustomPOJO list_items = list_members.get(position);
-        if (position == 0){
+        if (position == 0) {
             holder.garis.setVisibility(View.GONE);
         }
         holder.username.setText(list_items.getName());
@@ -57,18 +61,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.time.setText(list_items.getTime());
 
         String uri_ = list_items.getGambar();
-        try {
-            if (uri_ != null && uri_.contains("content") && !uri_.contains("provider")) {
-                Uri uri = Uri.parse(uri_);
+        String path = list_items.getPath();
 
-                Bitmap bitmap;
+        try {
+            if (uri_ != null && uri_.contains(".jpg")) {
                 try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.context.getContentResolver(), uri);
-                    holder.kunciImage.setImageBitmap(bitmap);
-                } catch (IOException e) {
+                    File f = new File(path, uri_);
+                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                    holder.kunciImage.setImageBitmap(b);
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-            } else if (uri_ != null && !uri_.equals("0") && !uri_.contains("provider")) {
+            } else if (uri_ != null && !uri_.equals("0") && !uri_.contains(".jpg")) {
                 holder.kunciImage.setImageResource(Integer.parseInt(uri_));
             } else {
                 holder.kunciImage.setImageResource(R.drawable.ic_launcher);

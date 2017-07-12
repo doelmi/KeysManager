@@ -88,9 +88,6 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cursor.close();
-        database.close();
-        helper.close();
     }
 
     private void populateRecylerViewValues() {
@@ -100,7 +97,7 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
 
             cursor = database.query(
                     "KUNCI",
-                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "STATUS", "GAMBAR_KUNCI", "GAMBAR_KUNCI_URI"},
+                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "STATUS", "GAMBAR_KUNCI", "GAMBAR_KUNCI_URI", "PATH"},
                     "DIARSIPKAN = ?",
                     new String[]{Integer.toString(1)},
                     null,
@@ -114,6 +111,7 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
                 String kunci = cursor.getString(2);
                 String status = cursor.getString(3);
                 String gambar = cursor.getString(4);
+                String path = cursor.getString(6);
                 if (gambar.equals("0")) {
                     gambar = cursor.getString(5);
                 }
@@ -127,11 +125,16 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
                 customPOJO.setTime(status);
                 customPOJO.setId(id);
                 customPOJO.setGambar(gambar);
+                customPOJO.setPath(path);
 
                 listContentArr.add(customPOJO);
             }
         } catch (SQLiteException e) {
             Toast.makeText(this, "Database Error : " + e, Toast.LENGTH_SHORT).show();
+        } finally {
+            cursor.close();
+            database.close();
+            helper.close();
         }
 
         adapter.setListContent(listContentArr);

@@ -10,10 +10,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,8 +49,8 @@ public class DetailKunciActivity extends AppCompatActivity {
     TextView dibawa_oleh;
     TextView waktu_kunci;
 
-    ImageView  imageView3;
-CircleImageView gambar_kunci;
+    ImageView imageView3;
+    CircleImageView gambar_kunci;
     TextView dibawaOleh_t;
     TextView waktu_kunci_t;
 
@@ -92,7 +94,7 @@ CircleImageView gambar_kunci;
             SQLiteDatabase db = helper.getReadableDatabase();
             Cursor cursor = db.query(
                     "KUNCI", //Select Tabel
-                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "GAMBAR_KUNCI", "STATUS", "DIBAWA_OLEH", "WAKTU", "TANGGAL", "GAMBAR_KUNCI_URI"}, //Select Tabel
+                    new String[]{"_id", "NAMA_KUNCI", "DESKRIPSI_KUNCI", "GAMBAR_KUNCI", "STATUS", "DIBAWA_OLEH", "WAKTU", "TANGGAL", "GAMBAR_KUNCI_URI", "PATH"}, //Select Tabel
                     "_id = ?", //Where clause
                     new String[]{Integer.toString(id_kunci)}, //Where value
                     null, //GroupBy
@@ -124,11 +126,16 @@ CircleImageView gambar_kunci;
                     Waktu = Integer.parseInt(tanggal) + " " + cariBulan(Integer.parseInt(bulan)) + " " + tahun + " " + jam;
                 }
                 waktu_kunci.setText(Waktu);
-                if (uri_ != null && !uri_.contains("provider")) {
-                    Uri uri = Uri.parse(uri_);
-//                    Toast.makeText(this, uri + "", Toast.LENGTH_SHORT).show();
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    gambar_kunci.setImageBitmap(bitmap);
+                String path = cursor.getString(9);
+
+                if (uri_ != null && uri_.contains(".jpg")) {
+                    try {
+                        File f = new File(path, uri_);
+                        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                        gambar_kunci.setImageBitmap(b);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 } else if (gambarKunci != 0) {
                     gambar_kunci.setImageResource(gambarKunci);
                 } else {
@@ -175,10 +182,7 @@ CircleImageView gambar_kunci;
             db.close();
         } catch (SQLException e) {
             Toast.makeText(this, "Database Error : " + e, Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            Toast.makeText(this, "Uri Error : " + e, Toast.LENGTH_SHORT).show();
         }
-
         if (diarsipkan != 0) {
             aktivitas_layout.setVisibility(View.GONE);
             getSupportActionBar().setTitle("Detail Kunci Diarsipkan");
@@ -238,7 +242,7 @@ CircleImageView gambar_kunci;
         startActivity(intent);
     }
 
-    private void hapus_data(int id) {
+    private void arsip_data(int id) {
         try {
             SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -246,7 +250,17 @@ CircleImageView gambar_kunci;
             update.put("DIARSIPKAN", 1);
 
             db.update("KUNCI", update, "_id = ?", new String[]{Integer.toString(id)});
-//            db.delete("KUNCI", "_id = ?", new String[]{Integer.toString(id)});
+            db.close();
+        } catch (SQLiteException e) {
+            Toast.makeText(this, e + "", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void hapus_data(int id) {
+        try {
+            SQLiteDatabase db = helper.getWritableDatabase();
+
+            db.delete("KUNCI", "_id = ?", new String[]{Integer.toString(id)});
             db.close();
         } catch (SQLiteException e) {
             Toast.makeText(this, e + "", Toast.LENGTH_SHORT).show();
@@ -273,7 +287,7 @@ CircleImageView gambar_kunci;
         final String date = dateFormat.format(new Date());
         try {
             SQLiteDatabase db = helper.getWritableDatabase();
-            db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda " + aktivitas + " kunci " + nama_kunci_public, date, nama_kunci_public));
+            db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda " + aktivitas + " kunci " + nama_kunci_public, date, nama_kunci_public, id_kunci));
             db.close();
         } catch (SQLiteException e) {
             Toast.makeText(this, e + "", Toast.LENGTH_SHORT).show();
@@ -282,25 +296,39 @@ CircleImageView gambar_kunci;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        AlertDialog.Builder builder;
+        AlertDialog dialog;
         switch (item.getItemId()) {
             case R.id.action_delete:
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailKunciActivity.this);
-                builder.setMessage("Apakah Anda yakin untuk mengarsipkan kunci " + nama_kunci_public + "?")
+                builder = new AlertDialog.Builder(DetailKunciActivity.this);
+                builder.setMessage("Apakah Anda yakin untuk menghapus kunci " + nama_kunci_public + "?")
                         .setTitle("Konfirmasi")
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 hapus_data(id_kunci);
-                                insertLog("mengarsipkan");
-//                                Intent intent = new Intent(DetailKunciActivity.this, MainActivity.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-//                                startActivity(intent);
-//                                ActivityCompat.finishAffinity(DetailKunciActivity.this);
+                                insertLog("menghapus");
                                 DetailKunciActivity.super.onBackPressed();
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, null);
-                AlertDialog dialog = builder.create();
+                dialog = builder.create();
+                dialog.show();
+                return true;
+            case R.id.action_arsip:
+                builder = new AlertDialog.Builder(DetailKunciActivity.this);
+                builder.setMessage("Apakah Anda yakin untuk mengarsipkan kunci " + nama_kunci_public + "?")
+                        .setTitle("Konfirmasi")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                arsip_data(id_kunci);
+                                insertLog("mengarsipkan");
+                                DetailKunciActivity.super.onBackPressed();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, null);
+                dialog = builder.create();
                 dialog.show();
                 return true;
             case android.R.id.home:
@@ -331,11 +359,12 @@ CircleImageView gambar_kunci;
         return super.onOptionsItemSelected(item);
     }
 
-    private ContentValues InsertLogAktivitas(String AKTIVITAS, String WAKTU, String KUNCI) {
+    private ContentValues InsertLogAktivitas(String AKTIVITAS, String WAKTU, String KUNCI, int id_kunci) {
         ContentValues values = new ContentValues();
         values.put("AKTIVITAS", AKTIVITAS);
         values.put("WAKTU", WAKTU);
         values.put("KUNCI", KUNCI);
+        values.put("ID_KUNCI", id_kunci);
         return values;
     }
 }

@@ -155,7 +155,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
                         SQLiteDatabase db = helper.getWritableDatabase();
                         String jam = pukul.getText().toString();
 
-                        db.insert("PENGAMBILAN_KUNCI", null, InsertPengambilanKunci(nama_pengambil.getText().toString(), no_id.getText().toString(), namaKunci, tanggalan_get, jam, id_log));
+                        db.insert("PENGAMBILAN_KUNCI", null, InsertPengambilanKunci(nama_pengambil.getText().toString(), no_id.getText().toString(), namaKunci, tanggalan_get, jam, id_log, id_kunci));
                         db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas(nama_pengambil.getText().toString() + " mengambil kunci " + kunci_diambil.getText().toString(), date));
 
                         ContentValues values = new ContentValues();
@@ -191,7 +191,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
     }
 
 
-    private ContentValues InsertPengambilanKunci(String NAMA_PENGAMBIL_KUNCI, String NO_ID_PENGAMBIL, String NAMA_KUNCI_AMBIL, String TANGGAL_AMBIL, String WAKTU_AMBIL, int ID_LOG) {
+    private ContentValues InsertPengambilanKunci(String NAMA_PENGAMBIL_KUNCI, String NO_ID_PENGAMBIL, String NAMA_KUNCI_AMBIL, String TANGGAL_AMBIL, String WAKTU_AMBIL, int ID_LOG, int ID_KUNCI) {
         ContentValues values = new ContentValues();
         values.put("NAMA_PENGAMBIL_KUNCI", NAMA_PENGAMBIL_KUNCI);
         values.put("NO_ID_PENGAMBIL", NO_ID_PENGAMBIL);
@@ -199,6 +199,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
         values.put("TANGGAL_AMBIL", TANGGAL_AMBIL);
         values.put("WAKTU_AMBIL", WAKTU_AMBIL);
         values.put("ID_LOG", ID_LOG);
+        values.put("ID_KUNCI", ID_KUNCI);
         return values;
     }
 

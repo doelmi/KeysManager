@@ -14,8 +14,13 @@
     <item
         android:id="@+id/action_delete"
         android:icon="@drawable/delete_putih"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         android:title="@string/hapus_kunci"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_arsip"
+        android:orderInCategory="102"
+        android:title="@string/arsip_kunci"
+        app:showAsAction="never" />
 
 </menu>

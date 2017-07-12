@@ -45,7 +45,6 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
     RecyclerView recyclerView;
     CustomAdapterLog adapter;
     private ArrayList<CustomPOJO> listContentArr = new ArrayList<>();
-    ListView listView;
     Context activity;
 
     public LogAktivitas() {
@@ -98,8 +97,6 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cursor.close();
-        database.close();
     }
 
     private void populateRecylerViewValues() {
@@ -137,6 +134,10 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
             }
         } catch (SQLiteException e) {
             Toast.makeText(this.getActivity(), "Database Error : " + e, Toast.LENGTH_SHORT).show();
+        }finally {
+            cursor.close();
+            database.close();
+            helper.close();
         }
 
         adapter.setListContent(listContentArr);
