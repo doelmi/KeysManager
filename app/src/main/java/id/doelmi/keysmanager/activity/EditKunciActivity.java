@@ -266,8 +266,20 @@ public class EditKunciActivity extends AppCompatActivity {
             uri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+
+                int width = bitmap.getWidth();
+                int height = bitmap.getHeight();
+                int newWidth = (height > width) ? width : height;
+                int newHeight = (height > width) ? height - (height - width) : height;
+                int cropW = (width - height) / 2;
+                cropW = (cropW < 0) ? 0 : cropW;
+                int cropH = (height - width) / 2;
+                cropH = (cropH < 0) ? 0 : cropH;
+                Bitmap cropImg = Bitmap.createBitmap(bitmap, cropW, cropH, newWidth, newHeight);
+                Bitmap scaledImg = Bitmap.createScaledBitmap(cropImg, 512, 512, true);
+
                 ImageView imageView = (ImageView) findViewById(R.id.imageView2);
-                imageView.setImageBitmap(bitmap);
+                imageView.setImageBitmap(scaledImg);
             } catch (IOException e) {
                 e.printStackTrace();
             }
