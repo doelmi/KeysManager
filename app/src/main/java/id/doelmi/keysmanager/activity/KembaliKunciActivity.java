@@ -154,7 +154,7 @@ public class KembaliKunciActivity extends AppCompatActivity {
 
                         ContentValues values = new ContentValues();
                         values.put("STATUS", 0);
-                        values.put("DIBAWA_OLEH", nama_pengembali.getText().toString());
+                        values.put("DIBAWA_OLEH", nama_pengembali.getText().toString().trim());
                         values.put("WAKTU", pukul.getText().toString());
                         values.put("TANGGAL", tanggal_get.getText().toString());
 

@@ -160,7 +160,7 @@ public class AmbilKunciActivity extends AppCompatActivity {
 
                         ContentValues values = new ContentValues();
                         values.put("STATUS", 1);
-                        values.put("DIBAWA_OLEH", nama_pengambil.getText().toString());
+                        values.put("DIBAWA_OLEH", nama_pengambil.getText().toString().trim());
                         values.put("WAKTU", jam);
                         values.put("TANGGAL", tanggalan_get);
 

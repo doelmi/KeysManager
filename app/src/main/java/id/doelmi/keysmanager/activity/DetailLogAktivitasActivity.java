@@ -89,7 +89,7 @@ public class DetailLogAktivitasActivity extends AppCompatActivity {
 
             Cursor cursor2 = db.query(
                     "PENGEMBALIAN_KUNCI", //Select Tabel
-                    new String[]{"_id", "NAMA_PENGEMBALI_KUNCI", "NO_ID_PENGEMBALI", "NAMA_KUNCI_KEMBALI", "TANGGAL_KEMBALI", "WAKTU_KEMBALI"}, //Select Tabel
+                    new String[]{"_id", "NAMA_PENGEMBALI_KUNCI", "NO_ID_PENGEMBALI", "NAMA_KUNCI_KEMBALI", "TANGGAL_KEMBALI", "WAKTU_KEMBALI", "ID_KUNCI"}, //Select Tabel
                     "ID_LOG = ?", //Where clause
                     new String[]{Integer.toString(id_log)}, //Where value
                     null, //GroupBy
@@ -102,7 +102,7 @@ public class DetailLogAktivitasActivity extends AppCompatActivity {
                 _kunci = cursor2.getString(3);
                 waktu_ = cursor2.getString(4) + " " + cursor2.getString(5);
                 aktivitas_ = "Pengembalian Kunci";
-                id_kunci = cursor.getInt(6);
+                id_kunci = cursor2.getInt(6);
             }
             cursor2.close();
 
