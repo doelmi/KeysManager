@@ -20,13 +20,14 @@
         <!--app:showAsAction="always" />-->
 
 
-    <item
-        android:id="@+id/action_settings"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:orderInCategory="101"
-        android:title="@string/action_settings"
-        app:showAsAction="never"
-    />
+    <!--<item-->
+        <!--android:id="@+id/action_settings"-->
+        <!--android:icon="@android:drawable/ic_menu_manage"-->
+        <!--android:orderInCategory="101"-->
+        <!--android:title="@string/action_settings"-->
+        <!--app:showAsAction="never"-->
+    <!--/>-->
+
     <item
         android:id="@+id/action_diarsipkan"
         android:icon="@android:drawable/ic_menu_manage"
