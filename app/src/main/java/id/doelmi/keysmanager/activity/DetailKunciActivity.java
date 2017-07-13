@@ -245,7 +245,6 @@ public class DetailKunciActivity extends AppCompatActivity {
     private void arsip_data(int id) {
         try {
             SQLiteDatabase db = helper.getWritableDatabase();
-
             ContentValues update = new ContentValues();
             update.put("DIARSIPKAN", 1);
 
@@ -259,7 +258,25 @@ public class DetailKunciActivity extends AppCompatActivity {
     private void hapus_data(int id) {
         try {
             SQLiteDatabase db = helper.getWritableDatabase();
+            Cursor cursor = db.query(
+                    "KUNCI", //Select Tabel
+                    new String[]{"GAMBAR_KUNCI_URI", "PATH"}, //Select Tabel
+                    "_id = ?", //Where clause
+                    new String[]{Integer.toString(id)}, //Where value
+                    null, //GroupBy
+                    null, //Having
+                    null  //OrderBy
+            );
+            String imgName = null, path = null;
+            if (cursor.moveToNext()) {
+                imgName = cursor.getString(0);
+                path = cursor.getString(1);
+            }
 
+            if (imgName != null && path != null) {
+                File myPath = new File(path, imgName);
+                myPath.delete();
+            }
             db.delete("KUNCI", "_id = ?", new String[]{Integer.toString(id)});
             db.close();
         } catch (SQLiteException e) {

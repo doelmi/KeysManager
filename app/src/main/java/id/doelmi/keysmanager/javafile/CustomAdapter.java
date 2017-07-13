@@ -67,7 +67,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             if (uri_ != null && uri_.contains(".jpg")) {
                 try {
                     File f = new File(path, uri_);
-                    Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                    Bitmap b = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(new FileInputStream(f)), 128, 128, true);
                     holder.kunciImage.setImageBitmap(b);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
