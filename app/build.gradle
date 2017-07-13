@@ -18,15 +18,6 @@ android {
         }
     }
     productFlavors {
-        Versi101 {
-            minSdkVersion 15
-            applicationId 'id.doelmi.keysmanager'
-            targetSdkVersion 25
-            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 2
-            versionName '1.0.1'
-            versionNameSuffix '_km.alpha'
-        }
         Versi102 {
             minSdkVersion 15
             applicationId 'id.doelmi.keysmanager'
