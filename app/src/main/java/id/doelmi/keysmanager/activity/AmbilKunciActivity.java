@@ -155,8 +155,8 @@ public class AmbilKunciActivity extends AppCompatActivity {
                         SQLiteDatabase db = helper.getWritableDatabase();
                         String jam = pukul.getText().toString();
 
-                        db.insert("PENGAMBILAN_KUNCI", null, InsertPengambilanKunci(nama_pengambil.getText().toString(), no_id.getText().toString(), namaKunci, tanggalan_get, jam, id_log, id_kunci));
-                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas(nama_pengambil.getText().toString() + " mengambil kunci " + kunci_diambil.getText().toString(), date));
+                        db.insert("PENGAMBILAN_KUNCI", null, InsertPengambilanKunci(nama_pengambil.getText().toString().trim(), no_id.getText().toString(), namaKunci, tanggalan_get, jam, id_log, id_kunci));
+                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas(nama_pengambil.getText().toString().trim() + " mengambil kunci " + kunci_diambil.getText().toString(), date));
 
                         ContentValues values = new ContentValues();
                         values.put("STATUS", 1);

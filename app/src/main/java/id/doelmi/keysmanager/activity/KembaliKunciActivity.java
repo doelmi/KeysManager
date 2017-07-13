@@ -149,8 +149,8 @@ public class KembaliKunciActivity extends AppCompatActivity {
                 } else {
                     try {
                         SQLiteDatabase db = helper.getWritableDatabase();
-                        db.insert("PENGEMBALIAN_KUNCI", null, InsertPengembalianKunci(nama_pengembali.getText().toString(), no_id.getText().toString(), namaKunci, tanggal_get.getText().toString(), pukul.getText().toString(), id_log, id_kunci));
-                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas(nama_pengembali.getText().toString() + " mengembalikan kunci " + kunci_kembali.getText().toString(), date));
+                        db.insert("PENGEMBALIAN_KUNCI", null, InsertPengembalianKunci(nama_pengembali.getText().toString().trim(), no_id.getText().toString(), namaKunci, tanggal_get.getText().toString(), pukul.getText().toString(), id_log, id_kunci));
+                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas(nama_pengembali.getText().toString().trim() + " mengembalikan kunci " + kunci_kembali.getText().toString(), date));
 
                         ContentValues values = new ContentValues();
                         values.put("STATUS", 0);

@@ -125,8 +125,8 @@ public class TambahKunciActivity extends AppCompatActivity {
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nama = nama_kunci.getText().toString().toUpperCase();
-                String deskripsi = deskripsi_kunci.getText().toString();
+                String nama = nama_kunci.getText().toString().toUpperCase().trim();
+                String deskripsi = deskripsi_kunci.getText().toString().trim();
                 if (nama.length() < 1) {
                     nama_kunci.setError("Nama kunci harus diisi!");
                     nama_kunci.setFocusable(true);
