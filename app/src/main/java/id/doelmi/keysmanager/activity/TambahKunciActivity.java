@@ -53,6 +53,8 @@ public class TambahKunciActivity extends AppCompatActivity {
 
     int finalHeight;
 
+    int last_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,10 +163,29 @@ public class TambahKunciActivity extends AppCompatActivity {
                     String real_path = dir.getAbsolutePath();
 
                     try {
-                        SQLiteDatabase db = helper.getWritableDatabase();
+                        SQLiteDatabase db = helper.getReadableDatabase();
 
                         db.insert("KUNCI", null, InsertKunci(nama, deskripsi, 0, imageName, 0, null, null, null, real_path));
-                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda menambahkan kunci " + nama, date, nama, listKunci.size()+1));
+
+                        try {
+                            Cursor cursor = db.query(
+                                    "KUNCI", //Select Tabel
+                                    new String[]{"_id", "NAMA_KUNCI"}, //Select Tabel
+                                    null, //Where clause
+                                    null, //Where value
+                                    null, //GroupBy
+                                    null, //Having
+                                    null  //OrderBy
+                            );
+                            if (cursor.moveToLast()) {
+                                last_id = cursor.getInt(0);
+                            }
+                            cursor.close();
+                        } catch (SQLiteException e) {
+                            e.printStackTrace();
+                        }
+
+                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda menambahkan kunci " + nama, date, nama, last_id));
                         db.close();
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(TambahKunciActivity.this);
