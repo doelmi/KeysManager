@@ -1,10 +1,6 @@
 package id.doelmi.keysmanager.javafile;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import id.doelmi.keysmanager.R;
@@ -90,7 +85,7 @@ public class CustomAdapterLog extends RecyclerView.Adapter<CustomAdapterLog.MyVi
         ImageView imageStatus;
         View garis;
 
-        public MyViewHolder(View itemView) {
+        private MyViewHolder(View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
@@ -104,11 +99,5 @@ public class CustomAdapterLog extends RecyclerView.Adapter<CustomAdapterLog.MyVi
         public void onClick(View v) {
         }
 
-    }
-
-    public void removeAt(int position) {
-        list_members.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(0, list_members.size());
     }
 }

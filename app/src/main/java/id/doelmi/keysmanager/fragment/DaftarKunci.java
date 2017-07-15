@@ -47,6 +47,7 @@ public class DaftarKunci extends Fragment {
     Context activity;
 
     TextView textView;
+    int lastFirstVisiblePosition = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,7 +79,7 @@ public class DaftarKunci extends Fragment {
 
         textView = (TextView) v.findViewById(R.id.tidak_ada);
 
-        FloatingActionButton fab = (FloatingActionButton)v.findViewById(R.id.floatingActionButton);
+        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,11 +163,20 @@ public class DaftarKunci extends Fragment {
         listContentArr.clear();
         populateRecylerViewValues();
 
+        (recyclerView.getLayoutManager()).scrollToPosition(lastFirstVisiblePosition);
+        lastFirstVisiblePosition = 0;
+
         if (listContentArr.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             textView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        lastFirstVisiblePosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
     }
 
     private interface ClickListener {

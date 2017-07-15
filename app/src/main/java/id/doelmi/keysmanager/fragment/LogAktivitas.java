@@ -17,20 +17,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CursorAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import id.doelmi.keysmanager.R;
-import id.doelmi.keysmanager.activity.DetailKunciActivity;
 import id.doelmi.keysmanager.activity.DetailLogAktivitasActivity;
 import id.doelmi.keysmanager.dbhelper.SQLiteDBHelper;
-import id.doelmi.keysmanager.javafile.CustomAdapter;
 import id.doelmi.keysmanager.javafile.CustomAdapterLog;
 import id.doelmi.keysmanager.javafile.CustomPOJO;
 
@@ -46,6 +40,7 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
     CustomAdapterLog adapter;
     private ArrayList<CustomPOJO> listContentArr = new ArrayList<>();
     Context activity;
+    int lastFirstVisiblePosition = 0;
 
     public LogAktivitas() {
         // Required empty public constructor
@@ -181,6 +176,8 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
         super.onResume();
         listContentArr.clear();
         populateRecylerViewValues();
+        (recyclerView.getLayoutManager()).scrollToPosition(lastFirstVisiblePosition);
+        lastFirstVisiblePosition = 0;
 
         if (listContentArr.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
@@ -189,18 +186,24 @@ public class LogAktivitas extends Fragment implements AdapterView.OnItemClickLis
         }
     }
 
-    public static interface ClickListener {
-        public void onClick(View view, int position);
-
-        public void onLongClick(View view, int position);
+    @Override
+    public void onPause() {
+        super.onPause();
+        lastFirstVisiblePosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
     }
 
-    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+    private interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+    private class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private ClickListener clickListener;
         private GestureDetector gestureDetector;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+        private RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

@@ -211,7 +211,7 @@ public class EditKunciActivity extends AppCompatActivity {
                     FileOutputStream fos = null;
                     try {
                         fos = new FileOutputStream(myPath);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fos);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {

@@ -1,6 +1,7 @@
 package id.doelmi.keysmanager.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -108,12 +110,12 @@ public class DetailKunciActivity extends AppCompatActivity {
                 nama_kunci_public = namaKunci;
 
                 String deskripsiKunci = cursor.getString(2);
-                int gambarKunci = cursor.getInt(3);
+                final int gambarKunci = cursor.getInt(3);
                 int statusKunci = cursor.getInt(4);
                 String DibawaOleh = cursor.getString(5);
                 String Waktu = cursor.getString(7) + " " + cursor.getString(6);
 
-                String uri_ = cursor.getString(8);
+                final String uri_ = cursor.getString(8);
 
 
                 if (Waktu.contains("null")) {
@@ -126,12 +128,12 @@ public class DetailKunciActivity extends AppCompatActivity {
                     Waktu = Integer.parseInt(tanggal) + " " + cariBulan(Integer.parseInt(bulan)) + " " + tahun + " " + jam;
                 }
                 waktu_kunci.setText(Waktu);
-                String path = cursor.getString(9);
+                final String path = cursor.getString(9);
 
                 if (uri_ != null && uri_.contains(".jpg")) {
                     try {
                         File f = new File(path, uri_);
-                        Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                        Bitmap b = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(new FileInputStream(f)), 256, 256, true);
                         gambar_kunci.setImageBitmap(b);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -141,6 +143,32 @@ public class DetailKunciActivity extends AppCompatActivity {
                 } else {
                     gambar_kunci.setImageResource(R.drawable.ic_launcher);
                 }
+
+                //pop-up
+                gambar_kunci.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Dialog dialog = new Dialog(DetailKunciActivity.this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.custom_dialog_gambar_kunci);
+                        ImageView imageView =(ImageView)dialog.findViewById(R.id.gambar);
+                        if (uri_ != null && uri_.contains(".jpg")) {
+                            try {
+                                File f = new File(path, uri_);
+                                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                                imageView.setImageBitmap(b);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        } else if (gambarKunci != 0) {
+                            imageView.setImageResource(gambarKunci);
+                        } else {
+                            imageView.setImageResource(R.drawable.ic_launcher);
+                        }
+                        dialog.show();
+                    }
+                });
+                //pop-up end
 
                 nama_kunci.setText(namaKunci);
                 deskripsi_kunci.setText(deskripsiKunci);

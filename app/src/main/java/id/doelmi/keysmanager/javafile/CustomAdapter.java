@@ -1,30 +1,22 @@
 package id.doelmi.keysmanager.javafile;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.doelmi.keysmanager.R;
-import id.doelmi.keysmanager.activity.MainActivity;
-
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private ArrayList<CustomPOJO> list_members = new ArrayList<>();
@@ -101,7 +93,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView username, content, time;
-        //        ImageView image;
         CircleImageView kunciImage;
         View garis;
 
@@ -112,7 +103,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             username = (TextView) itemView.findViewById(R.id.username);
             content = (TextView) itemView.findViewById(R.id.content);
             time = (TextView) itemView.findViewById(R.id.time);
-//            image = (ImageView) itemView.findViewById(R.id.imageView);
             kunciImage = (CircleImageView) itemView.findViewById(R.id.kunciImage);
             garis = itemView.findViewById(R.id.view9);
         }
@@ -121,11 +111,5 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         public void onClick(View v) {
         }
 
-    }
-
-    public void removeAt(int position) {
-        list_members.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(0, list_members.size());
     }
 }

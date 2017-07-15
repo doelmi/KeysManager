@@ -36,6 +36,7 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
     Context activity;
 
     TextView textView;
+    int lastFirstVisiblePosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,12 +148,19 @@ public class DaftarKunciDiarsipkan extends AppCompatActivity {
         super.onResume();
         listContentArr.clear();
         populateRecylerViewValues();
-
+        (recyclerView.getLayoutManager()).scrollToPosition(lastFirstVisiblePosition);
+        lastFirstVisiblePosition = 0;
         if (listContentArr.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
         } else {
             textView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        lastFirstVisiblePosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
     }
 
     private interface ClickListener {

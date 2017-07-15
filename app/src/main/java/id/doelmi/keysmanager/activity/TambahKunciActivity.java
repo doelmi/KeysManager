@@ -146,7 +146,7 @@ public class TambahKunciActivity extends AppCompatActivity {
                     FileOutputStream fos = null;
                     try {
                         fos = new FileOutputStream(myPath);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fos);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -164,7 +164,7 @@ public class TambahKunciActivity extends AppCompatActivity {
                         SQLiteDatabase db = helper.getWritableDatabase();
 
                         db.insert("KUNCI", null, InsertKunci(nama, deskripsi, 0, imageName, 0, null, null, null, real_path));
-                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda menambahkan kunci " + nama, date, nama));
+                        db.insert("LOG_AKTIVITAS", null, InsertLogAktivitas("Anda menambahkan kunci " + nama, date, nama, listKunci.size()+1));
                         db.close();
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(TambahKunciActivity.this);
@@ -247,11 +247,12 @@ public class TambahKunciActivity extends AppCompatActivity {
         return values;
     }
 
-    private ContentValues InsertLogAktivitas(String AKTIVITAS, String WAKTU, String KUNCI) {
+    private ContentValues InsertLogAktivitas(String AKTIVITAS, String WAKTU, String KUNCI, int ID_KUNCI) {
         ContentValues values = new ContentValues();
         values.put("AKTIVITAS", AKTIVITAS);
         values.put("WAKTU", WAKTU);
         values.put("KUNCI", KUNCI);
+        values.put("ID_KUNCI", ID_KUNCI);
         return values;
     }
 
