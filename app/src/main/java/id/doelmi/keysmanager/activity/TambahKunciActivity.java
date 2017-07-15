@@ -164,9 +164,7 @@ public class TambahKunciActivity extends AppCompatActivity {
 
                     try {
                         SQLiteDatabase db = helper.getReadableDatabase();
-
                         db.insert("KUNCI", null, InsertKunci(nama, deskripsi, 0, imageName, 0, null, null, null, real_path));
-
                         try {
                             Cursor cursor = db.query(
                                     "KUNCI", //Select Tabel
